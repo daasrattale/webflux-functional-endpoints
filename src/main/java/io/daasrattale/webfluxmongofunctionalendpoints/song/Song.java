@@ -1,7 +1,23 @@
-package io.daasrattale.functionalendpoints.song;
+package io.daasrattale.webfluxmongofunctionalendpoints.song;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.Objects;
+import java.util.UUID;
 
 
-public record Song (String title, String singer, Date releaseDate) {
+@Document
+@Getter
+@Setter
+@AllArgsConstructor
+public final class Song {
+    @Id
+    private UUID id;
+    private String title;
+    private String artist;
+
 }

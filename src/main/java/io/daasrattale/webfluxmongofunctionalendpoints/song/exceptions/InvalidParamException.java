@@ -3,11 +3,11 @@ package io.daasrattale.webfluxmongofunctionalendpoints.song.exceptions;
 import lombok.Getter;
 
 @Getter
-public class InvalidUUIDException extends RuntimeException {
+public class InvalidParamException extends RuntimeException {
 
-    private final Throwable cause;
+    private final String paramName;
 
-    public InvalidUUIDException(Throwable cause) {
-        this.cause = cause;
+    public InvalidParamException(String paramName) {
+        this.paramName = paramName;
     }
 }

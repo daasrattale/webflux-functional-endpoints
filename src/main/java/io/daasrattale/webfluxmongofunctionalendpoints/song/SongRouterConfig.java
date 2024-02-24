@@ -1,4 +1,4 @@
-package io.daasrattale.functionalendpoints.song;
+package io.daasrattale.webfluxmongofunctionalendpoints.song;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,13 +16,13 @@ public class SongRouterConfig {
         this.handler = handler;
     }
 
-
     @Bean
-    RouterFunction<ServerResponse> getAllSongs() {
-
+    RouterFunction<ServerResponse> router() {
         return route().path("/songs", builder -> builder
-                        .GET(handler::getAllSongs)
-                        .POST("/new", handler::addSong))
-                .build();
+                        .GET("/artist",handler::findAllByArtist)
+                        .GET(handler::findAll) // Get endpoints' order is important
+                        .POST("/new", handler::create)
+                        .DELETE("/{id}", handler::delete)
+                ).build();
     }
 }

@@ -6,13 +6,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.Map;
-import java.util.Objects;
 
 @ControllerAdvice
 public class SongExceptionHandler {
 
     @ExceptionHandler(InvalidUUIDException.class)
-    public ResponseEntity<Map<String, Object>> handle (InvalidUUIDException exception){
+    public ResponseEntity<Map<String, ?>> handle(final InvalidUUIDException exception) {
         return ResponseEntity
                 .badRequest()
                 .body(
@@ -20,6 +19,19 @@ public class SongExceptionHandler {
                                 "status", 400,
                                 "message", "Invalid UUID",
                                 "details", exception.getCause().getMessage()
+                        )
+                );
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, ?>> handle(final Exception exception) {
+        return ResponseEntity
+                .badRequest()
+                .body(
+                        Map.of(
+                                "status", 500,
+                                "message", "Unknown Error",
+                                "details", exception.getMessage()
                         )
                 );
     }

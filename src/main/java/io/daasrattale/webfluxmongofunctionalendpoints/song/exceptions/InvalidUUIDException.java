@@ -7,7 +7,7 @@ public class InvalidUUIDException extends RuntimeException {
 
     private final Throwable cause;
 
-    public InvalidUUIDException(Throwable cause) {
+    public InvalidUUIDException(final Throwable cause) {
         this.cause = cause;
     }
 }

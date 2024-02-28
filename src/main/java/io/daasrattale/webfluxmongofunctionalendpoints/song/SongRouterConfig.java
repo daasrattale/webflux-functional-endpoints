@@ -19,10 +19,10 @@ public class SongRouterConfig {
     @Bean
     RouterFunction<ServerResponse> router() {
         return route().path("/songs", builder -> builder
-                        .GET("/artist",handler::findAllByArtist)
-                        .GET(handler::findAll) // Get endpoints' order is important
-                        .POST("/new", handler::create)
-                        .DELETE("/{id}", handler::delete)
-                ).build();
+                .GET("/artist", handler::findAllByArtist)
+                .GET(handler::findAll) // Get endpoints' order is important
+                .POST("/new", handler::create)
+                .DELETE("/{id}", handler::delete)
+        ).build();
     }
 }

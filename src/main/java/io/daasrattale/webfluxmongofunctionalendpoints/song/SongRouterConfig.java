@@ -17,7 +17,7 @@ public class SongRouterConfig {
     }
 
     @Bean
-    RouterFunction<ServerResponse> router() {
+    public RouterFunction<ServerResponse> router() {
         return route().path("/songs", builder -> builder
                 .GET("/artist", handler::findAllByArtist)
                 .GET(handler::findAll) // Get endpoints' order is important

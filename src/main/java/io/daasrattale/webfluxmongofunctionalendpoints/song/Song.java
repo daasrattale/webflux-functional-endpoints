@@ -1,6 +1,7 @@
 package io.daasrattale.webfluxmongofunctionalendpoints.song;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -13,6 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @AllArgsConstructor
+@Builder
 public class Song {
     @Id
     private UUID id;

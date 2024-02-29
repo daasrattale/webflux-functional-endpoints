@@ -3,6 +3,7 @@ package io.daasrattale.webfluxmongofunctionalendpoints.song;
 
 import io.daasrattale.webfluxmongofunctionalendpoints.song.exceptions.InvalidParamException;
 import io.daasrattale.webfluxmongofunctionalendpoints.song.exceptions.InvalidUUIDException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
@@ -38,10 +39,10 @@ public class SongHandler {
 
     public Mono<ServerResponse> create(final ServerRequest request) {
         return request.bodyToMono(Song.class)
-                .switchIfEmpty(Mono.error(new RuntimeException("Song body not found")))
+                .switchIfEmpty(Mono.error(new RuntimeException("Song body not found"))) // you can use that or create a custom exception (recommended)
                 .doOnNext(song -> song.setId(UUID.randomUUID()))
                 .flatMap(song -> ServerResponse
-                        .ok()
+                        .status(HttpStatus.CREATED)
                         .body(repository.save(song), Song.class)
                 );
     }
@@ -57,6 +58,4 @@ public class SongHandler {
                         .body(repository.deleteById(songId), Void.class)
                 );
     }
-
-
 }
